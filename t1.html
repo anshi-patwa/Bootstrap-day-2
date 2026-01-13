@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day-2 Task 1</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body class="d-flex justify-content-center align-items-center gap-3 min-vh-100">
+
+    <button type="button" class="btn btn-danger"
+        data-bs-toggle="tooltip"
+        data-bs-placement="left"
+        title="A demo of Left Tooltip">
+        Left Demo
+    </button>
+
+    <button type="button" class="btn btn-success"
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom"
+        title="A demo of Bottom Tooltip">
+        Bottom Demo
+    </button>
+
+    <button type="button" class="btn btn-warning"
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        title="A demo of Top Tooltip">
+        Top Demo
+    </button>
+
+    <button type="button" class="btn btn-primary"
+        data-bs-toggle="tooltip"
+        data-bs-placement="right"
+        title="A demo of Right Tooltip">
+        Right Demo
+    </button>
+
+    <script>
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        tooltipTriggerList.forEach(el => new bootstrap.Tooltip(el))
+    </script>
+
+</body>
+</html>
