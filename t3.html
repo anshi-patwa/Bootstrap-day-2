@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Employee Form</title>
-
-<link href="bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+ 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+ 
 <style>
   .form-header {
     background: #0d6efd;
@@ -15,34 +15,44 @@
     padding: 12px 20px;
     font-weight: 500;
   }
+  /* Remove validation tick ONLY for country select */
+.was-validated .no-tick:valid,
+.was-validated .no-tick:invalid {
+  background-image: var(--bs-form-select-bg-img) !important;
+}
+ 
+/* Fix spacing so +91, +44 etc show properly */
+.no-tick {
+  padding-right: 2.5rem !important; /* space for dropdown arrow */
+  background-position: right .75rem center !important;
+}
+ 
 </style>
 </head>
-
+ 
 <body class="bg-light">
-
+ 
 <div class="container my-5">
   <div class="card shadow-sm">
     <div class="form-header">EMPLOYEE FORM</div>
-
+ 
     <div class="card-body">
       <form action="submit.html" class="needs-validation" novalidate>
-
-        <!-- Row 1 -->
+ 
         <div class="row mb-3">
           <div class="col-md-6">
             <label class="form-label">First name</label>
-            <input type="text" class="form-control" required>
+            <input type="text" class="form-control" required placeholder="First Name">
             <div class="invalid-feedback">First name is required</div>
           </div>
-
+ 
           <div class="col-md-6">
             <label class="form-label">Last name</label>
-            <input type="text" class="form-control" required>
+            <input type="text" class="form-control" placeholder="Last Name" required>
             <div class="invalid-feedback">Last name is required</div>
           </div>
         </div>
-
-        <!-- Row 2 -->
+ 
         <div class="row mb-3">
           <div class="col-md-4">
             <label class="form-label">Gender</label>
@@ -53,90 +63,97 @@
             </select>
             <div class="invalid-feedback">Select gender</div>
           </div>
-
+ 
           <div class="col-md-4">
             <label class="form-label">Email</label>
-            <input type="email" class="form-control" pattern="[a-z0-9.^@\s]+@[a-z^@\s]+\.[.a-z^@\s]+" required>
+            <input type="email" class="form-control" pattern="[a-z0-9.^@\s]+@[a-z^@\s]+\.[.a-z^@\s]+" placeholder="Email" required>
             <div class="invalid-feedback">Enter valid email</div>
           </div>
-
+ 
           <div class="col-md-4">
             <label class="form-label">Mobile Number</label>
-            <input type="tel" class="form-control" pattern="[0-9]{10}" required>
-            <div class="invalid-feedback">Enter mobile number</div>
+            <div class="input-group">
+              <select class="form-select no-tick " style="max-width: 100px;" required>
+                <option value="" selected disabled>+</option>
+                <option value="+1">+1(US)</option>
+                <option value="+44">+44(UK)</option>
+                <option value="+91">+91(IND)</option>
+                <option value="+61">+61(AU)</option>
+                <option value="+81">+81(JP)</option>
+              </select>
+         
+            <input type="tel" class="form-control" pattern="[0-9]{10}" aria-describedby="phoneFeedback" placeholder="Phone" required>
+            <div class="invalid-feedback" id="phoneFeedback">Enter mobile number</div>
           </div>
         </div>
 
-        <!-- Skills -->
         <div class="mb-3">
+          <br>
           <label class="form-label">Mandatory Skills</label><br>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="skill" required>
-            <label class="form-check-label">HTML 5</label>
+            <input class="form-check-input" type="radio" name="skill" id="skill1" required>
+            <label class="form-check-label" for="skill1">HTML 5</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="skill">
-            <label class="form-check-label">Javascript</label>
+            <input class="form-check-input" type="radio" name="skill" id="skill2">
+            <label class="form-check-label" for="skill2">Javascript</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="skill">
-            <label class="form-check-label">C# Programming</label>
+            <input class="form-check-input" type="radio" name="skill" id="skill3">
+            <label class="form-check-label" for="skill3">C# Programming</label>
           </div>
-
+ 
             <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="skill">
-            <label class="form-check-label">ASP .NET</label>
+            <input class="form-check-input" type="radio" name="skill" id="skill4">
+            <label class="form-check-label" for="skill4">ASP .NET</label>
           </div>
-
+ 
             <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="skill">
-            <label class="form-check-label">ASP .NET MVC</label>
+            <input class="form-check-input" type="radio" name="skill" id="skill5">
+            <label class="form-check-label" for="skill5">ASP .NET MVC</label>
           </div>
-
+          <div class="invalid-feedback d-block">
+          </div>
         </div>
-
-        <!-- File -->
+ 
         <div class="mb-3">
           <label class="form-label">Profile Picture</label>
-          <input type="file" class="form-control" required>
+          <input type="file" class="form-control" accept="image/*"  required>
           <div class="invalid-feedback">Upload profile picture</div>
         </div>
-
-        <!-- Address -->
+ 
         <div class="mb-3">
           <label class="form-label">Address</label>
-          <textarea class="form-control" rows="4" required></textarea>
+          <textarea class="form-control" rows="4" placeholder="Address" required></textarea>
           <div class="invalid-feedback">Address required</div>
         </div>
-
-        <!-- Terms -->
+ 
         <div class="form-check mb-4">
-          <input class="form-check-input" type="checkbox" required>
-          <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" id="check" required>
+          <label class="form-check-label" for="check">
             Agree to terms and conditions
           </label>
           <div class="invalid-feedback">
             You must agree before submitting
           </div>
         </div>
-
-        <!-- Buttons -->
+ 
         <div class="text-end">
           <button type="reset" class="btn btn-danger">Cancel</button>
           <button type="submit" class="btn btn-primary">Register</button>
         </div>
-
+ 
       </form>
     </div>
   </div>
 </div>
-
+ 
 <!-- Validation Script -->
 <script>
 (() => {
   'use strict'
   const forms = document.querySelectorAll('.needs-validation')
-
+ 
   Array.from(forms).forEach(form => {
     form.addEventListener('submit', event => {
       if (!form.checkValidity()) {
@@ -148,6 +165,9 @@
   })
 })()
 </script>
-
+ 
 </body>
 </html>
+ 
+ 
+ 
