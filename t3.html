@@ -26,7 +26,9 @@
   padding-right: 2.5rem !important; /* space for dropdown arrow */
   background-position: right .75rem center !important;
 }
- 
+.file-input::file-selector-button{
+  display: none;
+}
 </style>
 </head>
  
@@ -42,13 +44,13 @@
         <div class="row mb-3">
           <div class="col-md-6">
             <label class="form-label">First name</label>
-            <input type="text" class="form-control" required placeholder="First Name">
+            <input type="text" class="form-control" required placeholder="First Name" pattern="^[A-Za-z]+$">
             <div class="invalid-feedback">First name is required</div>
           </div>
  
           <div class="col-md-6">
             <label class="form-label">Last name</label>
-            <input type="text" class="form-control" placeholder="Last Name" required>
+            <input type="text" class="form-control" placeholder="Last Name" required pattern="^[A-Za-z]+$"    >
             <div class="invalid-feedback">Last name is required</div>
           </div>
         </div>
@@ -82,8 +84,8 @@
                 <option value="+81">+81(JP)</option>
               </select>
          
-            <input type="tel" class="form-control" pattern="[0-9]{10}" aria-describedby="phoneFeedback" placeholder="Phone" required>
-            <div class="invalid-feedback" id="phoneFeedback">Enter mobile number</div>
+            <input type="tel" class="form-control" pattern="[0-9]{10}"  placeholder="Phone" required>
+            <div class="invalid-feedback" >Enter mobile number</div>
           </div>
         </div>
 
@@ -118,7 +120,9 @@
  
         <div class="mb-3">
           <label class="form-label">Profile Picture</label>
-          <input type="file" class="form-control" accept="image/*"  required>
+          <div class="input-group">
+          <input type="file" class="form-control file-input" id="profilePic" accept="image/*"  required>
+          <label class="input-group-text btn btn-outline-secondary" for="profilePic">Choose File</label></div>
           <div class="invalid-feedback">Upload profile picture</div>
         </div>
  
