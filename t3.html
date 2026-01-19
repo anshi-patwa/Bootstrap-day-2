@@ -15,15 +15,13 @@
     padding: 12px 20px;
     font-weight: 500;
   }
-  /* Remove validation tick ONLY for country select */
 .was-validated .no-tick:valid,
 .was-validated .no-tick:invalid {
   background-image: var(--bs-form-select-bg-img) !important;
 }
  
-/* Fix spacing so +91, +44 etc show properly */
 .no-tick {
-  padding-right: 2.5rem !important; /* space for dropdown arrow */
+  padding-right: 2.5rem !important;
   background-position: right .75rem center !important;
 }
 .file-input::file-selector-button{
@@ -152,7 +150,6 @@
   </div>
 </div>
  
-<!-- Validation Script -->
 <script>
 (() => {
   'use strict';
