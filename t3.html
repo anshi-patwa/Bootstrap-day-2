@@ -50,7 +50,7 @@
  
           <div class="col-md-6">
             <label class="form-label">Last name</label>
-            <input type="text" class="form-control" placeholder="Last Name" required pattern="^[A-Za-z]+$"    >
+            <input type="text" class="form-control" placeholder="Last Name" required pattern="^[A-Za-z]+$">
             <div class="invalid-feedback">Last name is required</div>
           </div>
         </div>
@@ -75,7 +75,7 @@
           <div class="col-md-4">
             <label class="form-label">Mobile Number</label>
             <div class="input-group">
-              <select class="form-select no-tick " style="max-width: 100px;" required>
+              <select class="form-select no-tick " style="max-width: 120px;" required>
                 <option value="" selected disabled>+</option>
                 <option value="+1">+1(US)</option>
                 <option value="+44">+44(UK)</option>
@@ -133,12 +133,12 @@
         </div>
  
         <div class="form-check mb-4">
-          <input class="form-check-input" type="checkbox" id="check" required>
-          <label class="form-check-label" for="check">
-            Agree to terms and conditions
+            <input class="form-check-input" type="checkbox" id="check" required>
+            <label class="form-check-label" for="check">
+                 Agree to terms and conditions
           </label>
           <div class="invalid-feedback">
-            You must agree before submitting
+              You must agree before submitting
           </div>
         </div>
  
@@ -155,19 +155,35 @@
 <!-- Validation Script -->
 <script>
 (() => {
-  'use strict'
-  const forms = document.querySelectorAll('.needs-validation')
- 
-  Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-      if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
-      }
-      form.classList.add('was-validated')
-    }, false)
-  })
-})()
+  'use strict';
+
+  const form = document.querySelector('.needs-validation');
+  const fileInput = document.getElementById('profilePic');
+
+  form.addEventListener('submit', event => {
+    const file = fileInput.files[0];
+
+    if (!file) {
+      fileInput.setCustomValidity("Please upload an image");
+    }
+    
+    else if (!file.type.startsWith("image/")) {
+      fileInput.value = ""; // force clear
+      fileInput.setCustomValidity("Only image files are allowed");
+    }
+    
+    else {
+      fileInput.setCustomValidity("");
+    }
+
+    if (!form.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    form.classList.add('was-validated');
+  });
+})();
 </script>
  
 </body>

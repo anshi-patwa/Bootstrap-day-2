@@ -9,14 +9,14 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
  
-<body class="bg-light p-5">
+<body class="bg-light p-2 p-md-5">
  
 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#appointmentModal">
   Open Appointment Scheduler
 </button>
  
 <div class="modal fade" id="appointmentModal" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
+  <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
     <div class="modal-content">
  
       <div class="modal-header">
@@ -29,12 +29,12 @@
      
           <div class="mb-3">
             <label class="form-label">First Name</label>
-            <input type="text" class="form-control" placeholder="Enter Your First Name" required>
+            <input type="text" class="form-control" placeholder="Enter Your First Name" pattern="^[A-Za-z]+$" required>
           </div>
      
           <div class="mb-3">
             <label class="form-label">Last Name</label>
-            <input type="text" class="form-control" placeholder="Enter Your Last Name" required>
+            <input type="text" class="form-control" placeholder="Enter Your Last Name" pattern="^[A-Za-z]+$" required>
           </div>
      
           <div class="mb-3">
