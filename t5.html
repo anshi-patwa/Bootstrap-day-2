@@ -5,18 +5,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Appointment Scheduler</title>
  
-<link href="bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+ 
+<style>
+/* Make dropdown look exactly like input */
+.dropdown-toggle.form-control {
+  text-align: left;
+}
+ 
+.dropdown-toggle::after {
+  float: right;
+  margin-top: 8px;
+}
+ 
+/* Keep dropdown inside modal width */
+.dropdown-menu {
+  width: 100%;
+}
+ 
+/* Mobile friendly spacing */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem !important;
+  }
+ 
+  .modal-footer .btn {
+    width: 100%;
+  }
+}
+</style>
 </head>
  
-<body class="bg-light p-2 p-md-5">
+<body class="bg-light p-5">
  
 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#appointmentModal">
   Open Appointment Scheduler
 </button>
  
 <div class="modal fade" id="appointmentModal" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
  
       <div class="modal-header">
@@ -26,44 +54,72 @@
  
       <div class="modal-body">
         <form action="submit.html" method="post">
-     
+ 
           <div class="mb-3">
             <label class="form-label">First Name</label>
-            <input type="text" class="form-control" placeholder="Enter Your First Name" pattern="^[A-Za-z]+$" required>
+            <input type="text" class="form-control" pattern="^[A-Za-z]+$"
+            placeholder="Enter Your First Name" required>
           </div>
      
           <div class="mb-3">
             <label class="form-label">Last Name</label>
-            <input type="text" class="form-control" placeholder="Enter Your Last Name" pattern="^[A-Za-z]+$" required>
+            <input type="text" class="form-control" pattern="^[A-Za-z]+$"
+             placeholder="Enter Your Last Name" required>
           </div>
      
           <div class="mb-3">
             <label class="form-label">UNCC Email</label>
             <input type="email" class="form-control" placeholder="Enter Your UNCC Email" pattern="[a-z0-9.^@\s]+@[a-z^@\s]+\.[.a-z^@\s]+" required>
           </div>
-     
-          <div class="mb-3">
+ 
+          <div class="mb-3" >
             <label class="form-label">What Course Do You Need Help With?</label>
-            <select class="form-select" required>
-                <option value="" selected disabled>Select a Course</option>
-                <option>HTML</option>
-                <option>CSS</option>
-                <option>JavaScript</option>
-                <option>Bootstrap</option>
-              </select>
-             
+ 
+            <div class="dropdown">
+              <button class="btn btn-light border form-control dropdown-toggle"
+                      type="button"
+                      data-bs-toggle="dropdown"
+                      id="courseBtn">
+                Select a Course
+              </button>
+ 
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" onclick="setValue('course','HTML',this)">HTML</a></li>
+                <li><a class="dropdown-item" href="#" onclick="setValue('course','CSS',this)">CSS</a></li>
+                <li><a class="dropdown-item" href="#" onclick="setValue('course','JavaScript',this)">JavaScript</a></li>
+                <li><a class="dropdown-item" href="#" onclick="setValue('course','Bootstrap',this)">Bootstrap</a></li>
+              </ul>
+            </div>
+ 
+            <input type="hidden" name="course" id="course" required>
+            <div class="invalid-feedback">
+              Please select a course
+            </div>
           </div>
-     
+ 
           <div class="mb-3">
             <label class="form-label">Name of Preferred Tutor</label>
-            <select class="form-select" required>
-                <option value="" selected disabled>Anyone Available</option>
-                <option>A</option>
-                <option>B</option>
-              </select>
-             
+ 
+            <div class="dropdown">
+              <button class="btn btn-light border form-control dropdown-toggle"
+                      type="button"
+                      data-bs-toggle="dropdown"
+                      id="tutorBtn">
+                Anyone Available
+              </button>
+ 
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" onclick="setValue('tutor','John',this)">John</a></li>
+                <li><a class="dropdown-item" href="#" onclick="setValue('tutor','Sarah',this)">Sarah</a></li>
+              </ul>
+            </div>
+ 
+            <input type="hidden" name="tutor" id="tutor" required>
+            <div class="invalid-feedback">
+              Please select a tutor
+            </div>
           </div>
-     
+ 
           <div class="mb-3">
             <label class="form-label">Calendar Date</label>
             <input type="date" class="form-control" id="appointmentDate"  required>
@@ -74,6 +130,7 @@
             <input type="time" class="form-control" id="appointmentTime"  required>
           </div>
      
+         
           <div class="modal-footer">
             <button type="submit" class="btn btn-info text-white">
               Schedule Appointment
@@ -87,7 +144,39 @@
     </div>
   </div>
 </div>
-<!---
+ 
+<script>
+  function setValue(inputId, value, el) {
+    const input = document.getElementById(inputId);
+    input.value = value;
+ 
+    // Update button text
+    el.closest('.dropdown')
+      .querySelector('.dropdown-toggle').innerText = value;
+ 
+    // Remove error state
+    input.classList.remove('is-invalid');
+  }
+ 
+  document.querySelector("form").addEventListener("submit", function (e) {
+  let valid = true;
+ 
+  ["course", "tutor"].forEach(id => {
+    const input = document.getElementById(id);
+    if (!input.value) {
+      input.classList.add("is-invalid");
+      valid = false;
+    }
+  });
+ 
+  if (!valid) {
+    e.preventDefault(); // stop form submission
+  }
+});
+ 
+  </script>
+ 
+<!--
 <script>
   const dateInput = document.getElementById("appointmentDate");
   const timeInput = document.getElementById("appointmentTime");
@@ -114,13 +203,12 @@
   }
  
   dateInput.addEventListener("change", setMinDateTime);
- 
+  //runs with modal open
   document.getElementById("appointmentModal").addEventListener("shown.bs.modal", setMinDateTime);
   </script>
--->
-  </body>
+    -->
  
+</body>
 </html>
- 
  
  
